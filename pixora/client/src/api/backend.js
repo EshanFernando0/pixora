@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://pixora-wheat.vercel.app';
 /* eslint-disable no-unused-vars */
 
 // Helper function to get the token securely from local storage
