@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Explore from "./components/Explore";
@@ -9,6 +9,15 @@ import Auth from "./components/Auth";
 import History from "./components/History";
 import Settings from "./components/Settings";
 
+// The "Bouncer" Component: Checks if user has a token before letting them in
+const ProtectedRoute = ({ isAuthenticated, children }) => {
+  if (!isAuthenticated) {
+    // If they aren't logged in, redirect them to the login page
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
 function App() {
   // Initialize state by looking for an existing active user token
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("pixora_token"));
@@ -17,24 +26,52 @@ function App() {
     setIsAuthenticated(true);
   };
 
-  // If user isn't authenticated, completely block navigation and show the Auth screen
-  if (!isAuthenticated) {
-    return <Auth onAuthSuccess={handleAuthSuccess} />;
-  }
-
   return (
     <BrowserRouter>
       <Routes>
+        
+        {/* The Login Page is now its own separate URL */}
+        <Route 
+          path="/login" 
+          element={
+            isAuthenticated ? <Navigate to="/" replace /> : <Auth onAuthSuccess={handleAuthSuccess} />
+          } 
+        />
+
+        {/* The Main App Layout */}
         <Route path="/" element={<Layout />}>
+          
+          {/* 🟢 PUBLIC ROUTES (Anyone on the internet can see these) */}
           <Route index element={<Home />} />
           <Route path="explore" element={<Explore />} />
           <Route path="watch/:type/:id" element={<Watch />} />
-          <Route path="watchlist" element={<Watchlist />} />
-          <Route path="history" element={<History />} />
-          <Route path="settings" element={<Settings />} />
-          
-          <Route path="history" element={<div className="p-10 text-2xl text-center text-gray-400 mt-20">History Coming Soon</div>} />
-          <Route path="settings" element={<div className="p-10 text-2xl text-center text-gray-400 mt-20">Settings Coming Soon</div>} />
+
+          {/* 🔴 PROTECTED ROUTES (Requires an account) */}
+          <Route 
+            path="watchlist" 
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <Watchlist />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="history" 
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <History />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="settings" 
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <Settings />
+              </ProtectedRoute>
+            } 
+          />
+
         </Route>
       </Routes>
     </BrowserRouter>
