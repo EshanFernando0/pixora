@@ -132,7 +132,7 @@ export default function Explore() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for movies, shows, and more..."
-            className="w-full bg-black/40 border border-white/10 text-white rounded-2xl py-4 pl-12 pr-32 focus:outline-none focus:border-blue-500 focus:bg-black/60 transition-all shadow-2xl backdrop-blur-md text-lg"
+            className="w-full bg-black/40 border border-white/10 text-white rounded-2xl py-3 sm:py-4 pl-12 pr-28 sm:pr-32 focus:outline-none focus:border-blue-500 focus:bg-black/60 transition-all shadow-2xl backdrop-blur-md text-base sm:text-lg"
           />
           <button type="submit" className="absolute inset-y-2 right-2 bg-blue-600 hover:bg-blue-500 text-white px-6 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] active:scale-95">
             Search
@@ -169,7 +169,7 @@ export default function Explore() {
       ) : (
         <>
           {/* Results Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 mb-12">
             {results.map((item, index) => {
               const isSaved = savedIds.includes(item.id.toString());
               // Using index in key to prevent React errors if TMDB returns duplicates across pages

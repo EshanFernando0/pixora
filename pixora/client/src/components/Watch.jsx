@@ -123,8 +123,8 @@ export default function Watch() {
         <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 transition-opacity duration-500 ${lightsOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <div className="lg:col-span-2 flex flex-col gap-6">
             <div className="bg-surface backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-lg">
-              <div className="flex flex-col md:flex-row gap-6">
-                <img src={`${IMAGE_BASE_URL}${media.poster_path}`} alt={media.title || media.name} className="w-32 md:w-48 rounded-xl object-cover shadow-lg border border-white/5" />
+                  <div className="flex flex-col md:flex-row gap-6">
+                <img src={`${IMAGE_BASE_URL}${media.poster_path}`} alt={media.title || media.name} className="w-40 sm:w-44 md:w-48 lg:w-56 rounded-xl object-cover shadow-lg border border-white/5 mx-auto md:mx-0" />
                 <div className="flex flex-col justify-center">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="bg-blue-600 text-xs font-bold px-2 py-1 rounded text-white tracking-wider">HD ULTRA</span>

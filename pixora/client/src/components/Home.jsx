@@ -80,7 +80,7 @@ export default function Home() {
       
       {/* 1. HERO BANNER */}
       {heroMovie && (
-        <div className="relative w-full h-[75vh] flex items-end pb-24">
+        <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[75vh] flex items-end pb-12 sm:pb-16 md:pb-24">
           <div className="absolute inset-0 z-0">
             <img 
               src={`${IMAGE_BASE_URL}${heroMovie.backdrop_path}`} 
@@ -96,20 +96,20 @@ export default function Home() {
               <div className="flex items-center gap-2 text-blue-400 font-bold mb-4 tracking-widest text-sm drop-shadow-md">
                 <Sparkles size={16} /> #1 TRENDING WORLDWIDE
               </div>
-              <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-2xl leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 drop-shadow-2xl leading-tight">
                 {heroMovie.title}
               </h1>
-              <p className="text-gray-300 text-lg mb-8 line-clamp-3 max-w-xl drop-shadow-lg font-medium">
+              <p className="text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 line-clamp-3 max-w-xl drop-shadow-lg font-medium">
                 {heroMovie.overview}
               </p>
               
-              <div className="flex flex-wrap gap-4">
-                <Link to={`/watch/movie/${heroMovie.id}`} className="flex items-center gap-2 bg-white text-black px-8 py-3.5 rounded-full font-bold hover:bg-gray-200 transition-colors shadow-lg active:scale-95">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <Link to={`/watch/movie/${heroMovie.id}`} className="flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors shadow-lg active:scale-95 w-full sm:w-auto">
                   <Play size={20} fill="currentColor" /> Play Now
                 </Link>
                 <button 
                   onClick={() => setShowModal(true)}
-                  className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-8 py-3.5 rounded-full font-bold backdrop-blur-md transition-colors border border-white/20 active:scale-95"
+                  className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold backdrop-blur-md transition-colors border border-white/20 active:scale-95 w-full sm:w-auto"
                 >
                   <Info size={20} /> More Info
                 </button>

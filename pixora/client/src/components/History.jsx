@@ -1,41 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Play, Loader2, Trash2 } from 'lucide-react';
-import { tmdb, IMAGE_BASE_URL } from '../api/tmdb';
+import { IMAGE_BASE_URL } from '../api/tmdb';
 
 export default function History() {
   const [historyItems, setHistoryItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadHistory = async () => {
-      setLoading(true);
-      
-      // 1. Check if we already have history saved in the browser memory
-      const savedHistory = localStorage.getItem('pixora_watch_history');
-
-      if (savedHistory) {
-        // 2. If memory exists (even if it's empty), use it and stop loading!
-        setHistoryItems(JSON.parse(savedHistory));
-        setLoading(false);
-        return;
-      }
-
-      // 3. If no memory exists (first time opening the page), generate the simulated history
-      const data = await tmdb.getTrending('movie');
-      const simulatedHistory = data.slice(0, 8).map(item => ({
-        ...item,
-        progress: Math.floor(Math.random() * 60) + 20 
-      })).filter(item => item.backdrop_path);
-      
-      setHistoryItems(simulatedHistory);
-      
-      // Save this generated data to memory so it doesn't change on refresh
-      localStorage.setItem('pixora_watch_history', JSON.stringify(simulatedHistory));
-      setLoading(false);
-    };
-
-    loadHistory();
+    // Clear the old dummy history data and start from a clean empty state.
+    localStorage.setItem('pixora_watch_history', JSON.stringify([]));
+    setHistoryItems([]);
+    setLoading(false);
   }, []);
 
   const clearHistory = () => {

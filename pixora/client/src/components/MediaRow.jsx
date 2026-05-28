@@ -48,13 +48,13 @@ export default function MediaRow({ title, data, type = 'movie', endpoint = 'tren
       {/* Horizontal Scroll Container */}
       <div 
         ref={rowRef} 
-        className="flex overflow-x-auto gap-4 pb-4 pt-2 snap-x hide-scrollbar relative z-20 scroll-smooth"
+        className="flex overflow-x-auto gap-4 pb-4 pt-2 snap-x hide-scrollbar relative z-20 scroll-smooth touch-scroll"
       >
         {data.map((item) => (
           <Link 
             key={item.id} 
             to={`/watch/${item.media_type || type}/${item.id}`} 
-            className="shrink-0 w-36 md:w-44 lg:w-52 snap-start group cursor-pointer"
+            className="shrink-0 w-28 sm:w-36 md:w-44 lg:w-52 snap-start group cursor-pointer"
           >
             <div className="relative rounded-2xl overflow-hidden aspect-[2/3] border border-white/5 group-hover:border-white/30 transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-blue-500/30 group-hover:-translate-y-2">
               <img 
